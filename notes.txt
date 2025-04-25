@@ -1,0 +1,94 @@
+
+L0C13:
+    Port B = 1111 1110  # 0xFE
+L0C23:
+    RAM88 = 0x00
+L0C39:
+    Port B = 1000 0000  # 0x80
+
+IF A == 1111:
+    goto L0D14
+V.1 = 0
+
+Port B = 1111 1100  # 0xFC
+IF A == XXX0:   # 4
+    RAM88 = 0xDC
+    goto L0CFD
+IF A == XX01:   # 5
+    RAM88 = 0x74
+    goto L0CFD
+IF A == X011:   # 6 "Normal" Mode
+    V.1 = 1
+    Port B = 1111 1111
+    goto L0D14
+IF A == 0111:   # 7
+    RAM88 = 0x78
+    goto L0CFD
+
+Port B = 1111 1010  # 0xFA
+IF A == XXX0:   # 4
+    RAM88 = 0xD8
+    goto L0CFD
+IF A == XX01:   # 5
+    RAM88 = 0xBC
+    goto L0CFD
+IF A == X011:   # 6
+    RAM88 = 0xEC
+    goto L0CFD
+
+Port B = 1111 0110  # 0xF6
+IF A == XX0X:   # 5
+    RAM88 = 0xB8
+    goto L0CFD
+IF A == X01X:   # 6
+    RAM88 = 0xE8
+    goto L0CFD
+IF A == 011X:   # 7
+    RAM88 = 0xFC
+    goto L0CFD
+
+Port B = 1110 1110  # 0xEE
+IF A == XX0X:   # 5
+    RAM88 = 0xB4
+    goto L0CFD
+IF A == X01X:   # 6
+    RAM88 = 0xE4
+    goto L0CFD
+IF A == 011X:   # 7
+    RAM88 = 0xF4
+    goto L0CFD
+
+Port B = 1101 1110  # 0xDE
+IF A == XXX0:   # 4
+    RAM88 = 0xF8
+    goto L0CFD
+IF A == XX01:   # 5
+    RAM88 = 0x70
+    goto L0CFD
+IF A == X011:   # 6
+    RAM88 = 0xE0
+    goto L0CFD
+IF A == 0111:   # 7
+    RAM88 = 0xF0
+    goto L0CFD
+
+Port B = 1011 1110  # 0xBE
+IF A == XXX0:   # 4
+    RAM88 = 0xD0
+    goto L0CFD
+IF A == X0X1:   # 6
+    RAM88 = 0x7C
+    goto L0CFD
+IF A == 01X1:   # 7
+    RAM88 = 0xD4
+    goto L0CFD
+goto L0D14
+
+L0CFD:
+JSR L0F7B
+Port B = 1000 0000  # 0x80
+Wait until PORTA = 1111
+Init counter...
+Wait for TSTATUS?
+Restart?
+
