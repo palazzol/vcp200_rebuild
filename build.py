@@ -4,12 +4,16 @@ import platform
 PLATFORM = platform.system()
 
 # Assemble
+cmd = os.path.join('tools',PLATFORM,'as6804 -o -p -s -l selftest.asm')
+if os.system(cmd) != 0:
+    print('Error during Assembly')
+    sys.exit(-1)
 cmd = os.path.join('tools',PLATFORM,'as6804 -o -p -s -l vcp200.asm')
 if os.system(cmd) != 0:
     print('Error during Assembly')
     sys.exit(-1)
 # Link
-cmd = os.path.join('tools',PLATFORM,'aslink -n -m -u -s vcp200.rel')
+cmd = os.path.join('tools',PLATFORM,'aslink -n -m -u selftest.rel vcp200.rel')
 if os.system(cmd) != 0:
     print('Error during Linking')
     sys.exit(-1)
