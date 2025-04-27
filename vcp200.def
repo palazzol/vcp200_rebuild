@@ -1,0 +1,42 @@
+
+; MC6804P2 Data Space Defines
+
+PORTA   .equ    0x00
+PORTB   .equ    0x01
+DDRA    .equ    0x04
+DDRB    .equ    0x05
+
+TSTATUS .equ    0x09
+
+ROM5D   .equ    0x5D
+ROM5E   .equ    0x5E
+ROM5F   .equ    0x5F
+
+X       .equ    0x80
+Y       .equ    0x81
+V       .equ    0x82
+W       .equ    0x83
+RAM84   .equ    0x84
+
+SCNT    .equ    0x85
+VCNT    .equ    0x86
+FCNT    .equ    0x87
+
+RAM88   .equ    0x88        ; N?
+RAM89   .equ    0x89
+RAM8A   .equ    0x8A
+RAM8B   .equ    0x8B
+RAM8C   .equ    0x8C
+RAM8D   .equ    0x8D
+RAM8E   .equ    0x8E
+RAM8F   .equ    0x8F
+RAM90   .equ    0x90
+RAM91   .equ    0x91
+RAM92   .equ    0x92
+
+RAM9E   .equ    0x9E
+RAM9F   .equ    0x9F
+
+PRESCALE    .equ    0xFD
+TCOUNT  .equ    0xFE
+A       .equ    0xFF

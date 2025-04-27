@@ -57,9 +57,9 @@ RAMCLR:
         MVI     Y,#0x93         ; Y points to 0x93
 L0C2A:
         LDA     #0x00
-        STA     FCNT
-        STA     VCNT
         STA     SCNT
+        STA     VCNT
+        STA     FCNT
         JSR     L0FC7           ; Read and classify frames?
         BRCLR   #1,V,L0C39
 
@@ -199,15 +199,15 @@ L0D14:
         LDA     RAM88
         STA     RAM89
 
-        LDA     FCNT
+        LDA     SCNT
         ADD     VCNT
-        ADD     SCNT
+        ADD     FCNT
         CMP     #0x02
         BCC     L0D32
         MVI     RAM88,#0x00
         JMP     L0D4C
 L0D32:
-        LDA     SCNT
+        LDA     FCNT
         CMP     #0x10
         BCC     L0D39
         JMP     L0D49
@@ -217,16 +217,16 @@ L0D39:
         MVI     RAM88,#0x02
         JMP     L0D4C
 L0D41:
-        LDA     FCNT
+        LDA     SCNT
         BNE     L0D49
         MVI     RAM88,#0x02
         JMP     L0D4C
 L0D49:
         MVI     RAM88,#0x01
 L0D4C:
-        MVI     FCNT,#0x00
-        MVI     VCNT,#0x00
         MVI     SCNT,#0x00
+        MVI     VCNT,#0x00
+        MVI     FCNT,#0x00
         LDA     #0x85
         ADD     RAM88
         STA     X
@@ -247,7 +247,7 @@ L0D4C:
         ADD     RAM8C
         STA     X
         INC     ,X
-        LDA     FCNT
+        LDA     SCNT
         CMP     #0x02
         BCS     L0D7D
         MVI     RAM92,#0x00
@@ -259,7 +259,7 @@ L0D7D:
         MVI     RAM92,#0x01
         JMP     L0D94
 L0D87:
-        LDA     SCNT
+        LDA     FCNT
         CMP     #0x03
         BCS     L0D91
         MVI     RAM92,#0x02
@@ -407,7 +407,7 @@ L0E50:
         STA     X
         JMP     L0E33
 L0E59:
-        MVI     FCNT,#0xFF
+        MVI     SCNT,#0xFF
         MVI     VCNT,#0xFF
         MVI     X,#0x18         ; Read from DATA ROM
         MVI     Y,#0x93
@@ -419,10 +419,10 @@ L0E65:
         ROLA 
         ROLA 
         AND     #0x0F
-        STA     FCNT            ; Store upper nybble here
+        STA     SCNT            ; Store upper nybble here
         LDA     ,X
         AND     #0x0F
-        STA     SCNT            ; Store lower nybble here
+        STA     FCNT            ; Store lower nybble here
         CMP     #0x0F
         BNE     L0E7C
         MVI     VCNT,#0x08
@@ -433,7 +433,7 @@ L0E7C:
         BCC     L0E8A
 L0E80:
         LDA     X
-        ADD     SCNT
+        ADD     FCNT
         STA     X
         INC     X
         MVI     Y,#0x93
@@ -454,7 +454,7 @@ L0E98:
         JMP     L0EB3
 L0E9E:
         LDA     X
-        ADD     SCNT
+        ADD     FCNT
         STA     X
         MVI     Y,#0x93
         JMP     L0E65
@@ -468,7 +468,7 @@ L0EAD:
 L0EB2:
         INC     Y
 L0EB3:        
-        DEC     SCNT
+        DEC     FCNT
         BEQ     L0EB8
         JMP     L0E8A
 L0EB8:
@@ -480,7 +480,7 @@ L0EB8:
         MVI     Y,#0x93
         JMP     L0E65
 L0EC4:
-        LDA     FCNT
+        LDA     SCNT
         STA     VCNT
         CMP     #0x0E
         BEQ     L0ECD
@@ -668,7 +668,7 @@ L0FDB:
 L0FDE:
         CMP     ROM5D           ; Compare against User Data ROM (0x02)
         BCC     L0FE9           ; If >= 2, jump
-        INC     SCNT            ; count is 0 or 1, increment SCNT
+        INC     FCNT            ; count is 0 or 1, increment FCNT
 L0FE3:
         MVI     TCOUNT,#0x80    ; reset the transition counter
         SUB     A               ; clear A
@@ -682,7 +682,7 @@ L0FE9:
 L0FF1:
         CMP     ROM5F           ; Compare against User Data ROM (0x18)
         BCC     L0FF6           ; if >= 24, jump - too high
-        INC     FCNT            ; FCNT
+        INC     SCNT            ; SCNT
 L0FF6:
         JMP     L0FE3           ; 
 

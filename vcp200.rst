@@ -39,9 +39,9 @@
                      0083    18 W       .equ    0x83
                      0084    19 RAM84   .equ    0x84
                              20 
-                     0085    21 FCNT    .equ    0x85
+                     0085    21 SCNT    .equ    0x85
                      0086    22 VCNT    .equ    0x86
-                     0087    23 SCNT    .equ    0x87
+                     0087    23 FCNT    .equ    0x87
                              24 
                      0088    25 RAM88   .equ    0x88        ; N?
                      0089    26 RAM89   .equ    0x89
@@ -101,9 +101,9 @@
    0C27 B0 81 93      [ 4]   57         MVI     Y,#0x93         ; Y points to 0x93
    0C2A                      58 L0C2A:
    0C2A E8 00         [ 4]   59         LDA     #0x00
-   0C2C F9 85         [ 4]   60         STA     FCNT
+   0C2C F9 85         [ 4]   60         STA     SCNT
    0C2E F9 86         [ 4]   61         STA     VCNT
-   0C30 F9 87         [ 4]   62         STA     SCNT
+   0C30 F9 87         [ 4]   62         STA     FCNT
    0C32 8F C7         [ 4]   63         JSR     L0FC7           ; Read and classify frames?
    0C34 C1 82 02      [ 5]   64         BRCLR   #1,V,L0C39
                              65 
@@ -243,15 +243,15 @@
    0D20 F8 88         [ 4]  199         LDA     RAM88
    0D22 F9 89         [ 4]  200         STA     RAM89
                             201 
-   0D24 F8 85         [ 4]  202         LDA     FCNT
+   0D24 F8 85         [ 4]  202         LDA     SCNT
    0D26 FA 86         [ 4]  203         ADD     VCNT
-   0D28 FA 87         [ 4]  204         ADD     SCNT
+   0D28 FA 87         [ 4]  204         ADD     FCNT
    0D2A EC 02         [ 4]  205         CMP     #0x02
    0D2C 45            [ 2]  206         BCC     L0D32
    0D2D B0 88 00      [ 4]  207         MVI     RAM88,#0x00
    0D30 9D 4C         [ 4]  208         JMP     L0D4C
    0D32                     209 L0D32:
-   0D32 F8 87         [ 4]  210         LDA     SCNT
+   0D32 F8 87         [ 4]  210         LDA     FCNT
    0D34 EC 10         [ 4]  211         CMP     #0x10
    0D36 42            [ 2]  212         BCC     L0D39
    0D37 9D 49         [ 4]  213         JMP     L0D49
@@ -261,16 +261,16 @@
    0D3C B0 88 02      [ 4]  217         MVI     RAM88,#0x02
    0D3F 9D 4C         [ 4]  218         JMP     L0D4C
    0D41                     219 L0D41:
-   0D41 F8 85         [ 4]  220         LDA     FCNT
+   0D41 F8 85         [ 4]  220         LDA     SCNT
    0D43 05            [ 2]  221         BNE     L0D49
    0D44 B0 88 02      [ 4]  222         MVI     RAM88,#0x02
    0D47 9D 4C         [ 4]  223         JMP     L0D4C
    0D49                     224 L0D49:
    0D49 B0 88 01      [ 4]  225         MVI     RAM88,#0x01
    0D4C                     226 L0D4C:
-   0D4C B0 85 00      [ 4]  227         MVI     FCNT,#0x00
+   0D4C B0 85 00      [ 4]  227         MVI     SCNT,#0x00
    0D4F B0 86 00      [ 4]  228         MVI     VCNT,#0x00
-   0D52 B0 87 00      [ 4]  229         MVI     SCNT,#0x00
+   0D52 B0 87 00      [ 4]  229         MVI     FCNT,#0x00
    0D55 E8 85         [ 4]  230         LDA     #0x85
    0D57 FA 88         [ 4]  231         ADD     RAM88
    0D59 BC            [ 4]  232         STA     X
@@ -291,7 +291,7 @@
    0D6F FA 8C         [ 4]  247         ADD     RAM8C
    0D71 BC            [ 4]  248         STA     X
    0D72 E6            [ 4]  249         INC     ,X
-   0D73 F8 85         [ 4]  250         LDA     FCNT
+   0D73 F8 85         [ 4]  250         LDA     SCNT
    0D75 EC 02         [ 4]  251         CMP     #0x02
    0D77 65            [ 2]  252         BCS     L0D7D
    0D78 B0 92 00      [ 4]  253         MVI     RAM92,#0x00
@@ -303,7 +303,7 @@
    0D82 B0 92 01      [ 4]  259         MVI     RAM92,#0x01
    0D85 9D 94         [ 4]  260         JMP     L0D94
    0D87                     261 L0D87:
-   0D87 F8 87         [ 4]  262         LDA     SCNT
+   0D87 F8 87         [ 4]  262         LDA     FCNT
    0D89 EC 03         [ 4]  263         CMP     #0x03
    0D8B 65            [ 2]  264         BCS     L0D91
    0D8C B0 92 02      [ 4]  265         MVI     RAM92,#0x02
@@ -451,7 +451,7 @@
    0E56 BC            [ 4]  407         STA     X
    0E57 9E 33         [ 4]  408         JMP     L0E33
    0E59                     409 L0E59:
-   0E59 B0 85 FF      [ 4]  410         MVI     FCNT,#0xFF
+   0E59 B0 85 FF      [ 4]  410         MVI     SCNT,#0xFF
    0E5C B0 86 FF      [ 4]  411         MVI     VCNT,#0xFF
    0E5F B0 80 18      [ 4]  412         MVI     X,#0x18         ; Read from DATA ROM
    0E62 B0 81 93      [ 4]  413         MVI     Y,#0x93
@@ -463,10 +463,10 @@
    0E69 B5            [ 4]  419         ROLA 
    0E6A B5            [ 4]  420         ROLA 
    0E6B ED 0F         [ 4]  421         AND     #0x0F
-   0E6D F9 85         [ 4]  422         STA     FCNT            ; Store upper nybble here
+   0E6D F9 85         [ 4]  422         STA     SCNT            ; Store upper nybble here
    0E6F E0            [ 4]  423         LDA     ,X
    0E70 ED 0F         [ 4]  424         AND     #0x0F
-   0E72 F9 87         [ 4]  425         STA     SCNT            ; Store lower nybble here
+   0E72 F9 87         [ 4]  425         STA     FCNT            ; Store lower nybble here
    0E74 EC 0F         [ 4]  426         CMP     #0x0F
    0E76 05            [ 2]  427         BNE     L0E7C
    0E77 B0 86 08      [ 4]  428         MVI     VCNT,#0x08
@@ -477,7 +477,7 @@
    0E7F 4A            [ 2]  433         BCC     L0E8A
    0E80                     434 L0E80:
    0E80 AC            [ 4]  435         LDA     X
-   0E81 FA 87         [ 4]  436         ADD     SCNT
+   0E81 FA 87         [ 4]  436         ADD     FCNT
    0E83 BC            [ 4]  437         STA     X
    0E84 A8            [ 4]  438         INC     X
    0E85 B0 81 93      [ 4]  439         MVI     Y,#0x93
@@ -498,7 +498,7 @@
    0E9C 9E B3         [ 4]  454         JMP     L0EB3
    0E9E                     455 L0E9E:
    0E9E AC            [ 4]  456         LDA     X
-   0E9F FA 87         [ 4]  457         ADD     SCNT
+   0E9F FA 87         [ 4]  457         ADD     FCNT
    0EA1 BC            [ 4]  458         STA     X
    0EA2 B0 81 93      [ 4]  459         MVI     Y,#0x93
    0EA5 9E 65         [ 4]  460         JMP     L0E65
@@ -512,7 +512,7 @@
    0EB2                     468 L0EB2:
    0EB2 A9            [ 4]  469         INC     Y
    0EB3                     470 L0EB3:        
-   0EB3 FF 87         [ 4]  471         DEC     SCNT
+   0EB3 FF 87         [ 4]  471         DEC     FCNT
    0EB5 22            [ 2]  472         BEQ     L0EB8
    0EB6 9E 8A         [ 4]  473         JMP     L0E8A
    0EB8                     474 L0EB8:
@@ -524,7 +524,7 @@
    0EBF B0 81 93      [ 4]  480         MVI     Y,#0x93
    0EC2 9E 65         [ 4]  481         JMP     L0E65
    0EC4                     482 L0EC4:
-   0EC4 F8 85         [ 4]  483         LDA     FCNT
+   0EC4 F8 85         [ 4]  483         LDA     SCNT
    0EC6 F9 86         [ 4]  484         STA     VCNT
    0EC8 EC 0E         [ 4]  485         CMP     #0x0E
    0ECA 22            [ 2]  486         BEQ     L0ECD
@@ -712,7 +712,7 @@
    0FDE                     668 L0FDE:
    0FDE FC 5D         [ 4]  669         CMP     ROM5D           ; Compare against User Data ROM (0x02)
    0FE0 48            [ 2]  670         BCC     L0FE9           ; If >= 2, jump
-   0FE1 FE 87         [ 4]  671         INC     SCNT            ; count is 0 or 1, increment SCNT
+   0FE1 FE 87         [ 4]  671         INC     FCNT            ; count is 0 or 1, increment FCNT
    0FE3                     672 L0FE3:
    0FE3 B0 FE 80      [ 4]  673         MVI     TCOUNT,#0x80    ; reset the transition counter
    0FE6 FB FF         [ 4]  674         SUB     A               ; clear A
@@ -726,7 +726,7 @@
    0FF1                     682 L0FF1:
    0FF1 FC 5F         [ 4]  683         CMP     ROM5F           ; Compare against User Data ROM (0x18)
    0FF3 42            [ 2]  684         BCC     L0FF6           ; if >= 24, jump - too high
-   0FF4 FE 85         [ 4]  685         INC     FCNT            ; FCNT
+   0FF4 FE 85         [ 4]  685         INC     SCNT            ; SCNT
    0FF6                     686 L0FF6:
    0FF6 9F E3         [ 4]  687         JMP     L0FE3           ; 
                             688 

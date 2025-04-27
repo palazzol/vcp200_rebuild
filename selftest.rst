@@ -20,9 +20,9 @@
                      0083    18 W       .equ    0x83
                      0084    19 RAM84   .equ    0x84
                              20 
-                     0085    21 FCNT    .equ    0x85
+                     0085    21 SCNT    .equ    0x85
                      0086    22 VCNT    .equ    0x86
-                     0087    23 SCNT    .equ    0x87
+                     0087    23 FCNT    .equ    0x87
                              24 
                      0088    25 RAM88   .equ    0x88        ; N?
                      0089    26 RAM89   .equ    0x89
